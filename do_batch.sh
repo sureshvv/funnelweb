@@ -9,10 +9,12 @@ MAX_BATCHES=1
 
 BATCH_SIZE=1
 
-BATCH_FILE=do.test
+BATCH_FILE=do.spaces
+
+SRC_URL=`grep ^url settings.cfg | awk -F= '{print $2}'`
 
 do_massage() {
-    sed -n "${1},${2}p" $3 | sed -e 's?^?    http://sure.grafware.com?' -e 's/%/%%/g' > do_all.urls
+    sed -n "${1},${2}p" $3 | grep -v '^  *$' | sed -e "s-^-    $SRC_URL-" -e 's/%/%%/g' > do_all.urls
 }
 
 do_batch() {
@@ -24,6 +26,7 @@ do_batch() {
     if [ $MAX -gt 0 ]; then
         cat remote.cfg.in do_all.urls settings.cfg > remote.cfg
         bin/funnelweb --pipeline=remote.cfg --crawler:max=$MAX --crawler:debug
+#"--urltidy:link_expr=python:item['_path'].replace('il/', 'he/')"
     fi
     if [ $MAX -eq $BATCH_SIZE ]; then
         return 0
