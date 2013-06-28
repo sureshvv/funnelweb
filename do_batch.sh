@@ -7,9 +7,9 @@ DEBUG=$1
 BATCH=0
 MAX_BATCHES=1
 
-BATCH_SIZE=1
+BATCH_SIZE=2
 
-BATCH_FILE=do.spaces
+BATCH_FILE=do.spaces.it
 
 SRC_URL=`grep ^url settings.cfg | awk -F= '{print $2}'`
 

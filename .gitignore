@@ -5,3 +5,4 @@ var/
 develop-eggs/
 src/
 bin/
+settings.cfg
