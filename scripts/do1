@@ -1,0 +1,4 @@
+url=http://test.g2p.webfactional.com/fr
+nohup wget --force-html -r $url > all.8081 2>&1 &
+
+
